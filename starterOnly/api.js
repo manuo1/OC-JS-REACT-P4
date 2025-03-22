@@ -1,5 +1,5 @@
 // Send POST request
-async function post(request) {
+export async function post(request) {
   try {
     const response = await fetch(request);
     if (!response.ok) {
@@ -12,7 +12,7 @@ async function post(request) {
 }
 
 // Create form data request
-function createFormPostRequest(url, form) {
+export function createFormPostRequest(url, form) {
   const formData = new FormData(form);
   return new Request(url, {
     method: "POST",
