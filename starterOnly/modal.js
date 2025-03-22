@@ -1,3 +1,5 @@
+import { post, createFormPostRequest } from "./api.js";
+
 function editNav() {
   var x = document.getElementById("myTopnav");
   if (x.className === "topnav") {
@@ -10,7 +12,6 @@ function editNav() {
 // DOM Elements
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
-const formData = document.querySelectorAll(".formData");
 const closeBtn = document.querySelector(".close");
 // DOM Elements : form
 const form = document.forms["reserve"];
@@ -21,6 +22,8 @@ const birthdate = document.getElementById("birthdate");
 const quantity = document.getElementById("quantity");
 const locationChoices = document.querySelectorAll('input[name="location"]');
 const termsCheckbox = document.getElementById("checkbox1");
+const confirmationMessage = document.querySelector(".confirmation-message");
+const failureMessage = document.querySelector(".failure-message");
 
 // Email Regex
 // Validate if the email matches the regex: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
@@ -28,6 +31,29 @@ const termsCheckbox = document.getElementById("checkbox1");
 // +@[a-zA-Z0-9.-]+\.     // part between @ and . can contain letters, numbers, . -
 // +\.[a-zA-Z]{2,}$/      // last part can contain letters and must have at least 2 characters
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+// https://jsonplaceholder.typicode.com/
+// Free fake and reliable API for testing and prototyping
+const postFormUrl = "https://jsonplaceholder.typicode.com/posts";
+
+// inputs const
+const firstNameMinLength = 2;
+const lastNameMinLength = 2;
+const contestQuantityMinValue = 0;
+const contestQuantityMaxValue = 0;
+
+// Displays a modal element and hides the others.
+// between form, confirmationMessage, failureMessage
+function showModalElement(elementToShow) {
+  const elements = [form, confirmationMessage, failureMessage];
+  elements.forEach((element) => {
+    if (element === elementToShow) {
+      element.style.display = "block";
+    } else {
+      element.style.display = "none";
+    }
+  });
+}
 
 // ---------------------------------------- LAUNCH ----------------------------------------
 
@@ -37,6 +63,8 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 // launch modal form
 function launchModal() {
   modalbg.style.display = "block";
+  showModalElement(form);
+  form.reset();
 }
 
 // ---------------------------------------- CLOSE ----------------------------------------
@@ -62,14 +90,14 @@ window.addEventListener("click", function (event) {
 // -- First Name field has a minimum of 2 characters / is not empty.
 // ignoring leading and trailing spaces.
 function firstNameIsValid() {
-  return firstName.value.trim().length >= 2;
+  return firstName.value.trim().length >= firstNameMinLength;
 }
 
 // Last Name Validation
 // -- Last name field has a minimum of 2 characters / is not empty.
 // ignoring leading and trailing spaces.
 function lastNameIsValid() {
-  return lastName.value.trim().length >= 2;
+  return lastName.value.trim().length >= lastNameMinLength;
 }
 
 // Email Validation
@@ -90,7 +118,9 @@ function birthdateIsValid() {
 function contestQuantityIsValid() {
   if (quantity.value === "") return false;
   const numberValue = Number(quantity.value);
-  return Number.isInteger(numberValue) && numberValue >= 0 && numberValue <= 99;
+  return (
+    Number.isInteger(numberValue) && numberValue >= contestQuantityMinValue && numberValue <= contestQuantityMaxValue
+  );
 }
 
 // Location Validation
@@ -149,10 +179,29 @@ function validate() {
   return validators.every((validator) => validator());
 }
 
-// -- Form must be valid when the user clicks "Submit"
-form.addEventListener("submit", function (event) {
-  if (!validate()) {
-    event.preventDefault(); // Prevents the default form submission if form isn't valid
+// Displays the confirmation modal message
+function showModalConfirmationMessage() {
+  showModalElement(confirmationMessage);
+  document.getElementById("btn-close-success").addEventListener("click", closeModal);
+}
+
+// Displays the failure modal message
+function showModalFailureMessage() {
+  showModalElement(failureMessage);
+  document.getElementById("btn-close-failure").addEventListener("click", closeModal);
+}
+
+// Handles the form submission
+form.addEventListener("submit", async function (event) {
+  event.preventDefault();
+  // -- Form must be valid when the user clicks "Submit"
+  if (validate()) {
+    const postResult = await post(createFormPostRequest(postFormUrl, form));
+    if (postResult.ok) {
+      showModalConfirmationMessage();
+    } else {
+      showModalFailureMessage();
+    }
   }
 });
 
