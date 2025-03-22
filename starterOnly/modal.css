@@ -342,6 +342,15 @@ input[data-error]::after {
   cursor: pointer;
   border: 0;
 }
+
+/* modal elements after form submit*/
+.confirmation-message {
+  display: none;
+}
+.failure-message {
+  display: none;
+}
+
 /* custom select styles */
 .custom-select {
   position: relative;
