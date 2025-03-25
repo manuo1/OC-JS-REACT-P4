@@ -4,9 +4,17 @@
     <meta charset="utf-8" />
     <title>Reservation</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link rel="stylesheet" href="modal.css" />
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/navbar.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/footer.css" />
+    <link rel="stylesheet" href="css/modal.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link href="https://fonts.googleapis.com/css?family=DM+Sans" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
+    <!-- No favicon -->
+    <link rel="icon" href="data:," />
   </head>
   <body>
     <div class="topnav" id="myTopnav">
@@ -14,12 +22,13 @@
         <img alt="logo" src="Logo.png" />
       </div>
       <div class="main-navbar">
-        <a href="#" class="active"><span>Accueil</span></a>
-        <a href="#"><span>Détails de l'évènement</span></a>
-        <a href="#"><span>À propos</span></a>
-        <a href="#"><span>Contact</span></a>
-        <a href="#"><span>Évènements passés</span></a>
-        <a href="javascript:void(0);" class="icon" onclick="editNav()">
+        <div class="nav-links">
+          <a href="#"><span>Détails de l'évènement</span></a>
+          <a href="#"><span>À propos</span></a>
+          <a href="#"><span>Contact</span></a>
+          <a href="#"><span>Évènements passés</span></a>
+        </div>
+        <a href="javascript:void(0);" class="icon">
           <i class="fa fa-bars"></i>
         </a>
       </div>
@@ -36,12 +45,12 @@
           <p class="hero-text">
             Vous aimez jouer ? Notre prochain évènement gaming est ouvert aux réservations... Places limitées !
           </p>
-          <button class="btn-signup modal-btn">je m'inscris</button>
+          <button class="btn-signup">je m'inscris</button>
         </div>
         <div class="hero-img">
           <img src="./bg_img.jpg" alt="img" />
         </div>
-        <button class="btn-signup modal-btn">je m'inscris</button>
+        <button class="btn-signup">je m'inscris</button>
       </div>
 
       <div class="bground">
@@ -127,7 +136,7 @@
                 </label>
                 <br />
               </div>
-              <input class="button btn-submit" type="submit" value="C'est parti" />
+              <input class="btn-submit" type="submit" value="C'est parti" />
             </form>
 
             <div class="submit-message confirmation-message hidden">
@@ -137,7 +146,7 @@
 
             <div class="submit-message failure-message hidden">
               <p>Une erreur est survenue.</p>
-              <button class="button btn-close" id="btn-close-failure">Fermer</button>
+              <button class="btn-close" id="btn-close-failure">Fermer</button>
             </div>
           </div>
         </div>
@@ -146,6 +155,6 @@
     <footer>
       <p class="copyrights">Copyright 2014 - 2022, GameOn Inc.</p>
     </footer>
-    <script type="module" src="modal.js"></script>
+    <script type="module" src="main.js"></script>
   </body>
 </html>

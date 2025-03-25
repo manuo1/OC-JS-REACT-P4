@@ -1,17 +1,8 @@
 import { post, createFormPostRequest } from "./api.js";
 
-function editNav() {
-  var x = document.getElementById("myTopnav");
-  if (x.className === "topnav") {
-    x.className += " responsive";
-  } else {
-    x.className = "topnav";
-  }
-}
-
 // DOM Elements
 const modalbg = document.querySelector(".bground");
-const modalBtn = document.querySelectorAll(".modal-btn");
+const signupBtn = document.querySelectorAll(".btn-signup");
 const closeBtn = document.querySelector(".close");
 // DOM Elements : form
 const form = document.forms["reserve"];
@@ -58,7 +49,7 @@ function showModalElement(elementToShow) {
 // ---------------------------------------- LAUNCH ----------------------------------------
 
 // launch modal event
-modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
+signupBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
 // launch modal form
 function launchModal() {
@@ -169,42 +160,6 @@ function getValidator(formInputElement) {
   return validationMap.get(formInputElement)?.[0] || (() => false);
 }
 
-// ---------------------------------------- FORM SUBMIT VALIDATION ----------------------------------------
-
-// Check if all form element validators return true
-function validate() {
-  // Array of all validators of the validation map
-  const validators = Array.from(validationMap.values()).map(([validator, _]) => validator);
-  // Check if all validators are valid
-  return validators.every((validator) => validator());
-}
-
-// Displays the confirmation modal message
-function showModalConfirmationMessage() {
-  showModalElement(confirmationMessage);
-  document.getElementById("btn-close-success").addEventListener("click", closeModal);
-}
-
-// Displays the failure modal message
-function showModalFailureMessage() {
-  showModalElement(failureMessage);
-  document.getElementById("btn-close-failure").addEventListener("click", closeModal);
-}
-
-// Handles the form submission
-form.addEventListener("submit", async function (event) {
-  event.preventDefault();
-  // -- Form must be valid when the user clicks "Submit"
-  if (validate()) {
-    const postResult = await post(createFormPostRequest(postFormUrl, form));
-    if (postResult.ok) {
-      showModalConfirmationMessage();
-    } else {
-      showModalFailureMessage();
-    }
-  }
-});
-
 // ---------------------------------------- SHOW OR HIDE FORM VALIDATION ERRORS ----------------------------------------
 
 // Display the error message on the appropriate form element
@@ -262,3 +217,42 @@ form.addEventListener("submit", (_) => {
     manageErrorDisplay(formInputElement);
   });
 });
+
+// ---------------------------------------- FORM SUBMIT VALIDATION ----------------------------------------
+
+// Check if all form element validators return true
+function form_is_valid() {
+  // Array of all validators of the validation map
+  const validators = Array.from(validationMap.values()).map(([validator, _]) => validator);
+  // Check if all validators are valid
+  return validators.every((validator) => validator());
+}
+
+// Displays the confirmation modal message
+function showModalConfirmationMessage() {
+  showModalElement(confirmationMessage);
+  document.getElementById("btn-close-success").addEventListener("click", closeModal);
+}
+
+// Displays the failure modal message
+function showModalFailureMessage() {
+  showModalElement(failureMessage);
+  document.getElementById("btn-close-failure").addEventListener("click", closeModal);
+}
+
+// Handles the form submission
+async function handleFormSubmit(event) {
+  event.preventDefault();
+  const form = event.target;
+  // -- Form must be valid when the user clicks "Submit"
+  if (form_is_valid()) {
+    const postResult = await post(createFormPostRequest(postFormUrl, form));
+    if (postResult.ok) {
+      showModalConfirmationMessage();
+    } else {
+      showModalFailureMessage();
+    }
+  }
+}
+
+export { handleFormSubmit };
