@@ -1,0 +1,277 @@
+/* modal overlay  */
+.bground {
+  display: none;
+  position: fixed;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(26, 39, 156, 0.4);
+}
+
+/* modal container */
+.content {
+  --checkbox-size: 26px;
+
+  margin: 2% auto;
+  width: 100%;
+  max-width: 536px;
+  animation-name: modalopen;
+  animation-duration: var(--modal-duration);
+  background: var(--bg-dark);
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  color: var(--text-light);
+  padding-top: 10px;
+  box-shadow: 0px 12px 12px 0px #00000040;
+}
+
+/* modal body */
+.modal-body {
+  padding: 15px 7%;
+  margin: 15px auto;
+  min-height: 85vh;
+  position: relative;
+}
+
+/* ============================== FORM INPUT  ============================== */
+
+label,
+.text-label {
+  font-family: var(--font-default);
+  font-size: 14px;
+  font-weight: 400;
+  display: inline-block;
+  margin-top: 12px;
+  margin-bottom: 11px;
+}
+
+input {
+  padding: 8px;
+  border: 1px solid var(--border-form-input);
+  outline: none;
+}
+
+.text-control {
+  margin: 0;
+  padding: 8px;
+  width: 100%;
+  border-radius: 8px;
+  font-size: 20px;
+  height: 65px;
+}
+
+/* ============================== ERRORS DISPLAY ============================== */
+
+.formData[data-error]::after {
+  display: block;
+  content: attr(data-error);
+
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--tertiary-color);
+  text-align: left;
+
+  margin-top: 7px;
+  margin-bottom: 7px;
+  line-height: 0.3;
+
+  opacity: 0;
+  transition: 0.3s;
+}
+.formData[data-error-visible="true"]::after {
+  opacity: 1;
+}
+.formData[data-error-visible="true"] .text-control {
+  border: 2px solid var(--tertiary-color);
+}
+
+/* ============================== RADIOS AND CHECKBOXES ============================== */
+
+/* ---------- COMMON FOR CHECKBOX AND RADIO ---------- */
+
+/* Checkbox and radio container */
+.checkbox-label,
+.checkbox2-label {
+  position: relative;
+  margin-left: 30px;
+  margin-right: 25px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: var(--checkbox-size);
+  margin-top: 0;
+}
+
+/* Setting outside of checkboxes and radios */
+.checkbox-label .checkbox-icon,
+.checkbox2-label .checkbox-icon {
+  display: block;
+  width: var(--checkbox-size);
+  height: var(--checkbox-size);
+  position: absolute;
+  left: -30px;
+  transition: 0.3s;
+}
+
+/* Setting inside of checkboxes and radios */
+.checkbox-label .checkbox-icon::after,
+.checkbox2-label .checkbox-icon::after {
+  content: "";
+  position: absolute;
+  transition: 0.3s;
+  opacity: 0;
+}
+
+/* Display inside of checkbox and radio when checked */
+.checkbox-input:checked + .checkbox-label .checkbox-icon::after,
+.checkbox-input:checked + .checkbox2-label .checkbox-icon::after {
+  opacity: 1;
+}
+
+.checkbox-input {
+  display: none;
+}
+
+/* ---------- ONLY RADIO ---------- */
+
+/* Radios outside unchecked */
+.checkbox-label .checkbox-icon {
+  border: 1px solid var(--border-light);
+  border-radius: 50%;
+}
+
+/* Radios outside checked */
+.checkbox-input:checked + .checkbox-label .checkbox-icon {
+  border-color: var(--secondary-color);
+}
+
+/* Radios inside */
+.checkbox-label .checkbox-icon::after {
+  background-color: var(--secondary-color);
+  width: 65%;
+  height: 65%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+}
+
+/* ---------- ONLY CHECKBOXES ---------- */
+
+/* Unchecked Checkbox*/
+.checkbox2-label .checkbox-icon {
+  border-radius: 4px;
+  border: 0;
+  background: var(--border-form-input);
+}
+
+/* Checked Checkbox */
+.checkbox-input:checked + .checkbox2-label .checkbox-icon {
+  background: var(--secondary-color);
+}
+
+/* Checkmark */
+.checkbox2-label .checkbox-icon::after {
+  width: 25.4%;
+  height: 17.8%;
+  border-radius: 2px;
+  background: transparent;
+  border: 2px solid transparent;
+  border-bottom-color: var(--border-light);
+  border-left-color: var(--border-light);
+  transform-origin: center;
+  transform: translate(-50%, -50%) rotate(-55deg);
+  left: 50%;
+  top: 40%;
+}
+
+/* ============================== FORM BUTTONS ============================== */
+
+.close {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  width: 32px;
+  height: 32px;
+  opacity: 1;
+  cursor: pointer;
+  transform: scale(0.7);
+  z-index: 3;
+}
+.close:before,
+.close:after {
+  position: absolute;
+  left: 15px;
+  content: " ";
+  height: 33px;
+  width: 3px;
+  background-color: var(--bg-light);
+}
+.close:before {
+  transform: rotate(45deg);
+}
+.close:after {
+  transform: rotate(-45deg);
+}
+
+.btn-close,
+.btn-submit {
+  background: var(--primary-color);
+  display: block;
+  margin: auto;
+  padding: 0;
+  border-radius: 7px;
+  font-size: 1rem;
+  width: 40%;
+  color: var(--text-light);
+  cursor: pointer;
+  border: 0;
+  min-height: 40px;
+}
+
+.btn-close:hover,
+.btn-submit:hover {
+  background: var(--bg-btn-hover);
+}
+
+/* ==============================  MODAL ELEMENTS AFTER FORM SUBMIT ============================== */
+
+.submit-message p {
+  text-align: center;
+  font-size: 36px;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.submit-message .btn-close {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.confirmation-message {
+  display: none;
+}
+.failure-message {
+  display: none;
+}
+
+/* ==============================  ANIMATION ============================== */
+
+@keyframes modalopen {
+  from {
+    opacity: 0;
+    transform: translateY(-150px);
+  }
+  to {
+    opacity: 1;
+  }
+}

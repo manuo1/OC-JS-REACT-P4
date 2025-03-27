@@ -1,0 +1,107 @@
+:root {
+  --font-default: "DM Sans", Arial, Helvetica, sans-serif;
+  --font-secondary: "Roboto", Arial, Helvetica, sans-serif;
+  --font-slab: var(--font-default);
+  --modal-duration: 0.8s;
+
+  --primary-color: #fe142f;
+  --secondary-color: #279e7a;
+  --tertiary-color: #ff4e60;
+
+  --text--dark: #000;
+  --text-nav-link: #232323;
+  --text-light: #fff;
+  --text-navbar-icon: #ff001b;
+
+  --bg-light: #fff;
+  --bg-dark: #232323;
+  --bg-btn-hover: #3876ac;
+
+  --border-light: #fff;
+  --border-form-input: #c4c4c4;
+
+  /* Sizes */
+  --max-site-width: 1440px;
+  --max-container-width: 1200px;
+  --max-content-width: 1055px;
+
+  --min-site-width: 300px;
+
+  --horizontal-body-padding: 40px; /* ! see below */
+
+  /* hero-section and topnav % width calc :
+    max-horizontal-main-padding: 60px
+    footer-max-width =  max-site-width - (2*horizontal-body-padding)
+    hero-section-max-width =  max-site-width - (2*horizontal-body-padding) - (2*max-horizontal-main-padding) 
+    hero-section-width = hero-section-max-width / footer-max-width
+    
+    topnav-max-width = max-site-width - (2*horizontal-body-padding) - max-horizontal-main-padding
+    topnav-width = topnav-max-width / footer-max-width
+    */
+  --hero-section-width: 91.17%;
+  --topnav-width: 95.58%;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--bg-light);
+  font-family: var(--font-default);
+  font-size: 18px;
+  max-width: var(--max-site-width);
+  margin: 0 auto;
+  color: var(--text--dark);
+  padding: 0 var(--horizontal-body-padding);
+  min-width: var(--min-site-width);
+}
+
+button,
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary-color);
+  color: var(--text-light);
+  border-radius: 8px;
+  cursor: pointer;
+  text-transform: capitalize;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  border: none;
+}
+
+button:hover,
+.button:hover {
+  background: var(--bg-btn-hover);
+}
+
+a {
+  text-decoration: none;
+}
+
+/* ============================== DEBUG ============================== */
+
+/* * {
+  outline: 1px solid red !important;
+  box-sizing: border-box;
+}
+
+* {
+  background-color: rgba(255, 0, 0, 0.1) !important;
+}
+
+div,
+section,
+article,
+header,
+footer {
+  outline: 2px dashed red !important;
+} */

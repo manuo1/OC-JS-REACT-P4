@@ -1,0 +1,12 @@
+footer {
+  text-align: left;
+  width: 100%;
+  margin: 100px 0 60px;
+}
+.copyrights {
+  display: flex;
+  font-family: var(--font-secondary);
+  font-weight: 500;
+  font-size: 15px;
+  color: var(--primary-color);
+}
