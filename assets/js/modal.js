@@ -1,4 +1,5 @@
 import { post, createFormPostRequest } from "./api.js";
+import { API_URL } from "./config.js";
 
 // DOM Elements
 const modalbg = document.querySelector(".bground");
@@ -23,10 +24,6 @@ const headerLogo = document.querySelector(".header-logo");
 // +@[a-zA-Z0-9.-]+\.     // part between @ and . can contain letters, numbers, . -
 // +\.[a-zA-Z]{2,}$/      // last part can contain letters and must have at least 2 characters
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-// https://jsonplaceholder.typicode.com/
-// Free fake and reliable API for testing and prototyping
-const postFormUrl = "https://jsonplaceholder.typicode.com/posts";
 
 // inputs const
 const firstNameMinLength = 2;
@@ -257,7 +254,7 @@ async function handleFormSubmit(event) {
   const form = event.target;
   // -- Form must be valid when the user clicks "Submit"
   if (form_is_valid()) {
-    const postResult = await post(createFormPostRequest(postFormUrl, form));
+    const postResult = await post(createFormPostRequest(API_URL, form));
     if (postResult.ok) {
       showModalConfirmationMessage();
     } else {

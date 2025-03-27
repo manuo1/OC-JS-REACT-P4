@@ -1,5 +1,5 @@
-import { handleFormSubmit } from "./modules/modal.js";
-import { toggleNavLinksResponsiveMenu } from "./modules/menu.js";
+import { handleFormSubmit } from "./modal.js";
+import { toggleNavLinksResponsiveMenu } from "./menu.js";
 
 // Handles the display of navigation links in responsive mode (small screens)
 document.querySelector(".icon").addEventListener("click", toggleNavLinksResponsiveMenu);

@@ -14,6 +14,7 @@ export async function post(request) {
 // Create form data request
 export function createFormPostRequest(url, form) {
   const formData = new FormData(form);
+  // console.log(JSON.stringify(Object.fromEntries(formData.entries())));
   return new Request(url, {
     method: "POST",
     body: formData,
