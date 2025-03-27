@@ -17,6 +17,11 @@
     position: relative;
   }
 
+  .modal-body {
+    padding: 15px 7%;
+    margin-top: 0;
+  }
+
   /* ------------------------------ navbar ------------------------------ */
   .topnav {
     flex-direction: row;
@@ -28,6 +33,9 @@
   }
   .header-logo {
     height: 19px;
+  }
+  .header-logo.open-modal {
+    height: 24px;
   }
 
   .main-navbar {
@@ -137,5 +145,45 @@
   .copyrights {
     justify-content: center;
     font-size: 10px;
+  }
+
+  /* ------------------------------ modal ------------------------------ */
+
+  .bground {
+    background: transparent;
+  }
+  .content {
+    margin-top: 82px;
+    --checkbox-size: 20px;
+  }
+
+  .close {
+    transform: scale(0.6);
+  }
+  label,
+  .text-label {
+    margin-top: 7px;
+    margin-bottom: 9px;
+  }
+
+  .text-label {
+    margin-bottom: 7px;
+  }
+
+  .text-control {
+    height: 50px;
+  }
+
+  label[for="quantity"] span {
+    display: none;
+  }
+
+  .checkbox-label {
+    margin-bottom: 4px;
+  }
+
+  .btn-close,
+  .btn-submit {
+    min-height: 31px;
   }
 }

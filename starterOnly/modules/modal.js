@@ -15,6 +15,7 @@ const locationChoices = document.querySelectorAll('input[name="location"]');
 const termsCheckbox = document.getElementById("checkbox1");
 const confirmationMessage = document.querySelector(".confirmation-message");
 const failureMessage = document.querySelector(".failure-message");
+const headerLogo = document.querySelector(".header-logo");
 
 // Email Regex
 // Validate if the email matches the regex: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
@@ -31,7 +32,7 @@ const postFormUrl = "https://jsonplaceholder.typicode.com/posts";
 const firstNameMinLength = 2;
 const lastNameMinLength = 2;
 const contestQuantityMinValue = 0;
-const contestQuantityMaxValue = 0;
+const contestQuantityMaxValue = 99;
 
 // Displays a modal element and hides the others.
 // between form, confirmationMessage, failureMessage
@@ -56,6 +57,7 @@ function launchModal() {
   modalbg.style.display = "block";
   showModalElement(form);
   form.reset();
+  headerLogo.classList.add("open-modal");
 }
 
 // ---------------------------------------- CLOSE ----------------------------------------
@@ -64,6 +66,8 @@ function launchModal() {
 function closeModal() {
   modalbg.style.display = "none";
   form.reset();
+  headerLogo.classList.remove("open-modal");
+  hideAllErrors();
 }
 // Event listener to close the modal when the close button (X) is clicked
 closeBtn.addEventListener("click", closeModal);
@@ -217,6 +221,13 @@ form.addEventListener("submit", (_) => {
     manageErrorDisplay(formInputElement);
   });
 });
+
+// Hide all errors
+function hideAllErrors() {
+  validationMap.forEach((_, formInputElement) => {
+    hideError(formInputElement);
+  });
+}
 
 // ---------------------------------------- FORM SUBMIT VALIDATION ----------------------------------------
 

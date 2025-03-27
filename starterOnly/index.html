@@ -57,8 +57,7 @@
         <div class="content">
           <span class="close"></span>
           <div class="modal-body">
-            <!-- novalidate = prevents browser validations -->
-            <form name="reserve" action="index.html" method="get" novalidate>
+            <form name="reserve">
               <div class="formData">
                 <label for="first">Prénom</label>
                 <br />
@@ -84,7 +83,11 @@
                 <br />
               </div>
               <div class="formData">
-                <label for="quantity">À combien de tournois GameOn avez-vous déjà participé ?</label>
+                <label for="quantity" class="large">
+                  À combien de tournois
+                  <span>GameOn</span>
+                  avez-vous déjà participé ?
+                </label>
                 <br />
                 <input type="number" class="text-control" id="quantity" name="quantity" />
               </div>
@@ -132,7 +135,7 @@
                 <input class="checkbox-input" type="checkbox" id="checkbox2" />
                 <label class="checkbox2-label" for="checkbox2">
                   <span class="checkbox-icon"></span>
-                  Je Je souhaite être prévenu des prochains évènements.
+                  Je souhaite être prévenu des prochains évènements.
                 </label>
                 <br />
               </div>
@@ -140,8 +143,8 @@
             </form>
 
             <div class="submit-message confirmation-message hidden">
-              <p>Merci ! Votre réservation a été reçue.</p>
-              <button class="button btn-close" id="btn-close-success">Fermer</button>
+              <p>Merci pour votre inscription</p>
+              <button class="btn-close" id="btn-close-success">Fermer</button>
             </div>
 
             <div class="submit-message failure-message hidden">
