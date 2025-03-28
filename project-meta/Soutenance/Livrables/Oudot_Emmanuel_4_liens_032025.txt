@@ -1,0 +1,6 @@
+Repo:
+https://github.com/manuo1/OC-JS-REACT-P4
+
+
+Github-pages:
+https://manuo1.github.io/OC-JS-REACT-P4/
