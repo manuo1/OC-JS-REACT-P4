@@ -1,0 +1,5 @@
+querySelectorAll retourne une NodeList
+NodeList n'a pas les fonctions some() et every()
+Number() = constructeur et une fonction
+Map() permet d'utiliser des clés qui peuvent être des objects et d'utiliser forEach()
+forEach() sur un Map() retourne [valeur, clé] et non [clé, valeur]
